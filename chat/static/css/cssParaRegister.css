@@ -1,24 +1,20 @@
-/* Estilo para el contenedor de login */
-.login-container {
-    width: 100%;
-    max-width: 400px;  /* Ajuste el ancho máximo */
-    margin: 0 auto;
-    padding: 20px;
+/* Estilo específico para la página de registro */
+.register-page {
+    background-color: #121212; 
+    color: #E0E0E0; 
+    font-family: 'Arial', sans-serif;
+}
+
+/* Fondo oscuro solo para el contenedor de registro */
+.containerRegister {
     background-color: #1e1e1e;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    color: #E0E0E0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 30px;
 }
 
-/* Añadir una caja gris alrededor del formulario para contraste */
-.login-container .form-container {
-    background-color: #2c2c2c; /* Caja gris para contraste */
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* Estilo para el título de la página */
-.login-container h2 {
+/* Estilo del título */
+h2 {
     color: #E0E0E0;
     text-align: center;
     font-size: 28px;
@@ -27,34 +23,31 @@
 }
 
 /* Estilo para los campos del formulario */
-.login-container form {
+form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
 /* Estilo para los inputs */
-.login-container input[type="text"],
-.login-container input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"] {
     padding: 12px;
     border: 1px solid #333;
     border-radius: 25px;
     background-color: #333;
     color: #E0E0E0;
     font-size: 16px;
+    margin-bottom: 15px;
     transition: background-color 0.3s ease;
-    width: 100%;
 }
 
 /* Estilo al hacer focus en los inputs */
-.login-container input[type="text"]:focus,
-.login-container input[type="password"]:focus {
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
     background-color: #444;
     outline: none;
 }
 
-/* Estilo para el botón de enviar */
-.login-container button {
+/* Estilo para el botón de registro */
+button {
     padding: 12px 20px;
     background-color: #4CAF50;
     color: #fff;
@@ -62,32 +55,34 @@
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
-    font-size: 16px;
 }
 
 /* Efecto hover para el botón */
-.login-container button:hover {
+button:hover {
     background-color: #45a049;
 }
 
-/* Estilo para el enlace de registro */
-.login-container p {
+/* Estilo para el enlace de inicio de sesión */
+p {
     text-align: center;
     color: #E0E0E0;
 }
 
-.login-container a {
+a {
     color: #4CAF50;
     text-decoration: none;
 }
 
-.login-container a:hover {
+a:hover {
     text-decoration: underline;
 }
 
 /* Estilo para los errores del formulario */
-.login-container .errorlist {
+.errorlist {
     color: #ff6666;
     font-size: 14px;
+}
+
+ul {
+    color: white;
 }

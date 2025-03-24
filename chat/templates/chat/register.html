@@ -1,13 +1,24 @@
 {% extends "base.html" %}
+
 {% block title %}Registro{% endblock %}
+
+{% load static %} <!-- Cargar archivos estáticos -->
+
 {% block content %}
-  <div class="container mt-5">
-    <h2 class="text-center">Registro</h2>
-    <form method="post" class="mt-3">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-success">Registrarse</button>
-    </form>
-    <p class="mt-3">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
-  </div>
+  <!-- Añadimos la clase 'register-page' al body para aplicar el fondo oscuro solo en la página de registro -->
+  <body class="register-page">
+    <!-- Enlazamos el archivo CSS específico para la página de registro -->
+    <link rel="stylesheet" href="{% static 'css/cssParaRegister.css' %}">
+    
+    <!-- Aplica la clase 'containerRegister' al contenedor del formulario de registro -->
+    <div class="containerRegister mt-5">
+      <h2 class="text-center">Registro</h2>
+      <form method="post" class="mt-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Registrarse</button>
+      </form>
+      <p class="mt-3">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+    </div>
+  </body>
 {% endblock %}
