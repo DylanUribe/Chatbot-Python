@@ -6,19 +6,29 @@
     <title>Chatbot de Programación</title>
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
-        .chat-box { width: 50%; margin: auto; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; }
+        .chat-box { width: 50%; margin: auto; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; background-color: #f9f9f9; }
         .user, .bot { padding: 5px; margin: 5px; }
         .user { text-align: right; color: blue; }
         .bot { text-align: left; color: green; }
+        input[type="text"] { width: 80%; padding: 10px; margin-top: 10px; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
     </style>
 </head>
 <body>
     <h2>Chatbot de Programación</h2>
     <div class="chat-box" id="chat-box"></div>
-    <input type="text" id="user-input" placeholder="Escribe tu mensaje">
-    <button onclick="sendMessage()">Enviar</button>
+    <form id="chat-form">
+        <input type="text" id="user-input" placeholder="Escribe tu mensaje" required>
+        <button type="submit">Enviar</button>
+    </form>
 
     <script>
+        document.getElementById("chat-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            sendMessage();
+        });
+
         function sendMessage() {
             let userInput = document.getElementById("user-input").value;
             let chatBox = document.getElementById("chat-box");
@@ -27,10 +37,16 @@
 
             chatBox.innerHTML += `<div class='user'><strong>Tú:</strong> ${userInput}</div>`;
 
+            // Mostrar "pensando..." mientras el bot responde
+            chatBox.innerHTML += `<div class='bot'><strong>Bot:</strong> Pensando...</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
             fetch(`/get_response/?message=${userInput}`)
                 .then(response => response.json())
                 .then(data => {
-                    chatBox.innerHTML += `<div class='bot'><strong>Bot:</strong> ${data.response}</div>`;
+                    // Reemplazar el "pensando..." por la respuesta real
+                    let botResponse = document.querySelector('.bot:last-child');
+                    botResponse.innerHTML = `<strong>Bot:</strong> ${data.response}`;
                     chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll
                 });
 

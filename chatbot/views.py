@@ -1,25 +1,13 @@
-import nltk
-from nltk.tokenize import word_tokenize
-from difflib import get_close_matches
+from django.http import JsonResponse
+from django.shortcuts import render
+from .functions import get_python_response  # Importar desde functions.py
 
-nltk.download('punkt')
+def chatbot_view(request):
+    return render(request, "chatbot/chatbot.html")
 
 def get_response(request):
-    if request.method == "GET":
-        user_message = request.GET.get("message", "").lower()
-        user_tokens = word_tokenize(user_message)
+    message = request.GET.get("message", "")  
+    response_text = get_python_response(message)  
+    return JsonResponse({"response": response_text})
 
-        # Obtener todas las preguntas en la base de datos
-        all_questions = [pregunta.texto.lower() for pregunta in Pregunta.objects.all()]
-        
-        # Buscar coincidencias cercanas con la pregunta del usuario
-        best_match = get_close_matches(user_message, all_questions, n=1, cutoff=0.6)
-        
-        if best_match:
-            pregunta = Pregunta.objects.get(texto__iexact=best_match[0])
-            respuesta = Respuesta.objects.filter(pregunta=pregunta).first()
-            bot_response = respuesta.texto if respuesta else "No encontré una respuesta exacta."
-        else:
-            bot_response = "No sé la respuesta, pero puedes enseñarme nuevas preguntas."
 
-        return JsonResponse({"response": bot_response})
