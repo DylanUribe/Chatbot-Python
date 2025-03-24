@@ -1,0 +1,106 @@
+/* Establece el fondo oscuro para la página */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo de la caja del chat */
+.chat-box {
+    width: 70%;
+    margin: 20px auto;
+    padding: 20px;
+    height: 400px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow-y: auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilo para las burbujas del usuario */
+.user {
+    text-align: right;
+    margin: 10px 0;
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 70%;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para las burbujas del bot */
+.bot {
+    text-align: left;
+    margin: 10px 0;
+    padding: 8px 12px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 20px;
+    display: inline-block;
+    max-width: 70%;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para el formulario de entrada */
+form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Estilo para el campo de entrada */
+input[type="text"] {
+    width: 62%; 
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #333;
+    color: #E0E0E0;
+    font-size: 16px;
+    margin-right: 10px;
+    transition: background-color 0.3s;
+}
+
+/* Estilo para el campo de entrada al hacer focus */
+input[type="text"]:focus {
+    background-color: #444;
+    outline: none;
+}
+
+/* Estilo para el botón de enviar */
+button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Efecto hover para el botón */
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo general para el contenedor */
+.container {
+    width: 70%; /* Igual que la caja de respuestas del chat */
+    margin: 20px auto;
+}
+
+/* Estilo para el título */
+h2 {
+    text-align: center;
+    font-size: 32px;
+    color: #E0E0E0;
+    margin-top: 30px;
+    font-weight: bold;
+}

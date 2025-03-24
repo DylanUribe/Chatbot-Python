@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot de Programación</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .chat-box { width: 50%; margin: auto; border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; background-color: #f9f9f9; }
-        .user, .bot { padding: 5px; margin: 5px; }
-        .user { text-align: right; color: blue; }
-        .bot { text-align: left; color: green; }
-        input[type="text"] { width: 80%; padding: 10px; margin-top: 10px; }
-        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #45a049; }
-    </style>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% load static %}  
+
+{% block title %}Bienvenido! Escribe lo que quieras!{% endblock %}
+
+{% block content %}
+    <!-- Cargar el archivo CSS de los archivos estáticos -->
+    <link href="{% static 'css/cssParaChat.css' %}" rel="stylesheet">
+
     <h2>Chatbot de Programación</h2>
     <div class="chat-box" id="chat-box"></div>
     <form id="chat-form">
@@ -47,11 +39,10 @@
                     // Reemplazar el "pensando..." por la respuesta real
                     let botResponse = document.querySelector('.bot:last-child');
                     botResponse.innerHTML = `<strong>Bot:</strong> ${data.response}`;
-                    chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll
+                    chatBox.scrollTop = chatBox.scrollHeight;  
                 });
 
             document.getElementById("user-input").value = "";
         }
     </script>
-</body>
-</html>
+{% endblock %}
