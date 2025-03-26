@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from .functions import get_python_response  # Importar desde functions.py
+from .functions import get_python_response  
 
 def chatbot_view(request):
     return render(request, "chatbot/chatbot.html")

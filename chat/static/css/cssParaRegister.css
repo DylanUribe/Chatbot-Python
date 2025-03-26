@@ -86,3 +86,28 @@ a:hover {
 ul {
     color: white;
 }
+
+/*alineación y espaciamiento entre etiquetas y campos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Ajuste de etiquetas */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #E0E0E0;
+}
+
+/* Estilo para los requisitos de contraseña */
+.password-requirements {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.mt-5 {
+    margin-bottom: 3rem !important;
+}
