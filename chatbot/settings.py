@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 
 # Configuración de autenticación
 LOGIN_REDIRECT_URL = '/'  
-LOGOUT_REDIRECT_URL = '/' 
+LOGOUT_REDIRECT_URL = 'login' 
 
 
 # Middleware
