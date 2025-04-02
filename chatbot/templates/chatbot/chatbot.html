@@ -23,23 +23,44 @@
         function sendMessage() {
             let userInput = document.getElementById("user-input").value;
             let chatBox = document.getElementById("chat-box");
-            
+
             if (userInput.trim() === "") return;
 
-            chatBox.innerHTML += `<div class='user'><strong>Tú:</strong> ${userInput}</div>`;
+    // Crear el contenedor del mensaje del usuario
+            let userMessageContainer = document.createElement("div");
+            userMessageContainer.classList.add("message-container");
 
-            chatBox.innerHTML += `<div class='bot'><strong>Bot:</strong> Pensando...</div>`;
+            let userMessage = document.createElement("div");
+            userMessage.classList.add("user");
+            userMessage.innerHTML = `<strong>Tú:</strong> ${userInput}`;
+            userMessageContainer.appendChild(userMessage);
+            chatBox.appendChild(userMessageContainer);
+
+    // Crear el contenedor del mensaje del bot
+            let botMessageContainer = document.createElement("div");
+            botMessageContainer.classList.add("message-container");
+
+            let botMessage = document.createElement("div");
+            botMessage.classList.add("bot");
+            botMessage.innerHTML = `<strong>Bot:</strong> Pensando...`;
+            botMessageContainer.appendChild(botMessage);
+            chatBox.appendChild(botMessageContainer);
+
             chatBox.scrollTop = chatBox.scrollHeight;
 
+    // Hacer la petición al servidor
             fetch(`/get_response/?message=${userInput}`)
                 .then(response => response.json())
                 .then(data => {
-                    let botResponse = document.querySelector('.bot:last-child');
-                    botResponse.innerHTML = `<strong>Bot:</strong> ${data.response}`;
-                    chatBox.scrollTop = chatBox.scrollHeight;  
+                    botMessage.innerHTML = `<strong>Bot:</strong> ${data.response}`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                })
+                .catch(error => {
+                    botMessage.innerHTML = `<strong>Bot:</strong> Error al obtener respuesta.`;
                 });
 
             document.getElementById("user-input").value = "";
         }
+
     </script>
 {% endblock %}
