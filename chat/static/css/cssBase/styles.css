@@ -1,0 +1,28 @@
+/* Estilos globales generales para el sitio */
+
+html, body {
+    height: 100%;
+    background-color: #fff; 
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Arial', sans-serif;
+}
+
+.content-container {
+    flex-grow: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+nav.bg-dark {
+    background-color: #000000 !important;
+}
+
+footer.bg-dark {
+    background-color: #000000 !important;
+}

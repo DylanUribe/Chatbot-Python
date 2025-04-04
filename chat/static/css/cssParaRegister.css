@@ -1,0 +1,113 @@
+/* Estilo específico para la página de registro */
+.register-page {
+    background-color: #121212; 
+    color: #E0E0E0; 
+    font-family: 'Arial', sans-serif;
+}
+
+/* Fondo oscuro solo para el contenedor de registro */
+.containerRegister {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+}
+
+/* Estilo del título */
+h2 {
+    color: #E0E0E0;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Estilo para los campos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para los inputs */
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 25px;
+    background-color: #333;
+    color: #E0E0E0;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo al hacer focus en los inputs */
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    background-color: #444;
+    outline: none;
+}
+
+/* Estilo para el botón de registro */
+button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto hover para el botón */
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para el enlace de inicio de sesión */
+p {
+    text-align: center;
+    color: #E0E0E0;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo para los errores del formulario */
+.errorlist {
+    color: #ff6666;
+    font-size: 14px;
+}
+
+ul {
+    color: white;
+}
+
+/*alineación y espaciamiento entre etiquetas y campos */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Ajuste de etiquetas */
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #E0E0E0;
+}
+
+/* Estilo para los requisitos de contraseña */
+.password-requirements {
+    color: white;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.mt-5 {
+    margin-bottom: 3rem !important;
+}

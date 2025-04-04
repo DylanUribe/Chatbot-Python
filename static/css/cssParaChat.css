@@ -1,0 +1,144 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Botón de toggle */
+#toggle-sidebar {
+    margin: 10px;
+}
+
+/* Contenedor principal de la app */
+#chat-container {
+    display: flex;
+    height: 85%;
+    flex: 1;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed; 
+    top: 0;
+    left: 0; 
+    width: 250px;
+    height: 100%; 
+    padding: 10px;
+    padding-top: 200px; 
+    transition: all 0.3s ease; 
+    transform: translateX(0); 
+    opacity: 1;
+    visibility: visible; 
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%); 
+    opacity: 0; 
+    visibility: hidden; 
+}
+
+/* Área de contenido principal */
+.main-content {
+    flex-grow: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.sidebar.hidden + .main-content {
+    margin-left: 0; 
+}
+/* Título */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #E0E0E0;
+    margin: 0 0 10px;
+}
+
+/* Caja del chat */
+.chat-box {
+    flex-grow: 1;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    border: 1px solid #333;
+    overflow-y: auto;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Mensajes */
+.message-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.user {
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    max-width: 80%;
+}
+
+.bot {
+    background-color: #333;
+    color: #fff;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: fit-content;
+    max-width: 80%;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+    position: relative;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #333;
+    color: #E0E0E0;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+input[type="text"]:focus {
+    background-color: #444;
+    outline: none;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color: #45a049;
+}

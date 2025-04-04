@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}  
+
+{% block title %}Bienvenido! Escribe lo que quieras!{% endblock %}
+
+{% block content %}
+
+    <link href="{% static 'css/cssParaChat.css' %}" rel="stylesheet">
+    <button id="toggle-sidebar" style="margin: 10px;">☰ Conversaciones</button>
+
+    <div id="chat-container" style="display: flex;">
+        <!-- SIDEBAR -->
+        <div id="sidebar" class="sidebar">
+            <h3>Tus conversaciones</h3>
+            <ul>
+                {% for convo in conversations %}
+                    <li style="margin-bottom: 10px;">
+                        {{ convo.title }}<br>
+                        <a href="{% url 'download_conversation_pdf' convo.id %}">📥 Descargar</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    
+      
+       <!-- CONTENIDO PRINCIPAL -->
+       <div id="main-content" class="main-content">
+            <h2>Chatbot de Programación</h2>
+            <div class="chat-box" id="chat-box"></div>
+            <form id="chat-form">
+                <input type="text" id="user-input" placeholder="Escribe tu mensaje" required>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        const toggleBtn = document.getElementById("toggle-sidebar");
+        const sidebar = document.getElementById("sidebar");
+
+        toggleBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("hidden");
+        })
+        
+        document.getElementById("chat-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            sendMessage();
+        });
+
+        function sendMessage() {
+            let userInput = document.getElementById("user-input").value;
+            let chatBox = document.getElementById("chat-box");
+
+            if (userInput.trim() === "") return;
+
+    // Crear el contenedor del mensaje del usuario
+            let userMessageContainer = document.createElement("div");
+            userMessageContainer.classList.add("message-container");
+
+            let userMessage = document.createElement("div");
+            userMessage.classList.add("user");
+            userMessage.innerHTML = `<strong>Tú:</strong> ${userInput}`;
+            userMessageContainer.appendChild(userMessage);
+            chatBox.appendChild(userMessageContainer);
+
+    // Crear el contenedor del mensaje del bot
+            let botMessageContainer = document.createElement("div");
+            botMessageContainer.classList.add("message-container");
+
+            let botMessage = document.createElement("div");
+            botMessage.classList.add("bot");
+            botMessage.innerHTML = `<strong>Bot:</strong> Pensando...`;
+            botMessageContainer.appendChild(botMessage);
+            chatBox.appendChild(botMessageContainer);
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Hacer la petición al servidor
+            fetch(`/get_response/?message=${userInput}`)
+                .then(response => response.json())
+                .then(data => {
+                    botMessage.innerHTML = `<strong>Bot:</strong> ${data.response}`;
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                })
+                .catch(error => {
+                    botMessage.innerHTML = `<strong>Bot:</strong> Error al obtener respuesta.`;
+                });
+
+            document.getElementById("user-input").value = "";
+        }
+
+    </script>
+{% endblock %}
