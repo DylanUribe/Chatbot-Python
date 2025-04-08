@@ -4,6 +4,8 @@ Django settings for chatbot project.
 
 import os
 from pathlib import Path
+import dj_database_url
+
 
 # Ruta base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,9 +13,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Seguridad
 SECRET_KEY = 'django-insecure-reemplazar-con-una-clave-segura'
 
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['*']  # Cámbialo en producción
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1', 'localhost']  # Cámbialo en producción
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Aplicaciones instaladas
 INSTALLED_APPS = [
@@ -37,6 +43,7 @@ LOGOUT_REDIRECT_URL = 'login'
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -50,11 +57,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Configuración de la base de datos (SQLite por defecto)
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 # Configuración de URLs
