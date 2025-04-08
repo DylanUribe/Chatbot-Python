@@ -10,7 +10,7 @@
     
     <div class="containerRegister mt-5">
       <h2 class="text-center">Registro</h2>
-      <form method="post" class="mt-3">
+      <form method="post" class="mt-3" id="register-form">
         {% csrf_token %}
         
         <div class="form-group">
@@ -31,6 +31,7 @@
         <div class="form-group">
           {{ form.password2.label_tag }}
           {{ form.password2 }}
+          <p id="password-error" style="color: red; display: none;">Las contraseñas no coinciden.</p>
         </div>
 
         <ul class="password-requirements">
@@ -44,5 +45,27 @@
 
       <p class="mt-3">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
     </div>
+
+    <script>
+      document.getElementById("register-form").addEventListener("submit", function(e) {
+        const password1 = document.getElementById("id_password1").value;
+        const password2 = document.getElementById("id_password2").value;
+    
+        if (password1 !== password2) {
+          e.preventDefault(); 
+          document.getElementById("password-error").style.display = "block";
+        }
+      });
+    
+      document.getElementById("id_password2").addEventListener("input", function() {
+        const pass1 = document.getElementById("id_password1").value;
+        const pass2 = this.value;
+    
+        if (pass1 === pass2) {
+          document.getElementById("password-error").style.display = "none";
+        }
+      });
+    </script>
+
   </body>
 {% endblock %}

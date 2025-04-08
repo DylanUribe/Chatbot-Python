@@ -11,8 +11,15 @@ from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from .models import Conversation, Message
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.conf import settings
+import os
+from django.contrib.auth.decorators import login_required
 
 
+
+@login_required
 def chatbot_view(request):
     conversations = []
     if request.user.is_authenticated:
@@ -39,14 +46,12 @@ def get_response(request):
             )
             request.session['conversation_id'] = conversation.id
 
-        # Guardar el mensaje del usuario
         Message.objects.create(
             conversation=conversation,
             role='user',
             content=message
         )
 
-        # Guardar la respuesta del bot
         Message.objects.create(
             conversation=conversation,
             role='bot',
@@ -154,7 +159,6 @@ def chat_view(request):
     if request.method == "POST":
         user_input = request.POST.get("message")
 
-        # 1. Obtener o crear una conversación activa para el usuario
         conversation_id = request.session.get('conversation_id')
         conversation = None
 
@@ -183,3 +187,34 @@ def chat_view(request):
         )
 
         return JsonResponse({'response': response})
+    
+def generate_pdf_for_conversation(convo):
+    pdf_dir = os.path.join(settings.MEDIA_ROOT, 'pdfs')
+    os.makedirs(pdf_dir, exist_ok=True)
+
+    pdf_path = os.path.join(pdf_dir, f'conversation_{convo.id}.pdf')
+    
+    c = canvas.Canvas(pdf_path)
+    c.drawString(100, 800, f"Título: {convo.title}")
+    c.drawString(100, 780, f"Fecha: {convo.created_at.strftime('%Y-%m-%d %H:%M')}")
+    c.drawString(100, 760, "Conversación iniciada...")
+    c.save()
+
+    convo.pdf_file.name = f'pdfs/conversation_{convo.id}.pdf'
+    convo.save()
+
+
+@receiver(post_save, sender=Conversation)
+def create_pdf_on_new_conversation(sender, instance, created, **kwargs):
+    if created:
+        generate_pdf_for_conversation(instance)
+
+@login_required
+def start_new_conversation(request):
+    request.session.pop('conversation_id', None)  
+    conversation = Conversation.objects.create(
+        user=request.user,
+        title=f"Conversación de {timezone.now().strftime('%d/%m/%Y %H:%M')}"
+    )
+    request.session['conversation_id'] = conversation.id
+    return redirect('chatbot_view')

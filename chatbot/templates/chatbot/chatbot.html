@@ -31,6 +31,9 @@
             <form id="chat-form">
                 <input type="text" id="user-input" placeholder="Escribe tu mensaje" required>
                 <button type="submit">Enviar</button>
+                <a href="{% url 'new_conversation' %}" class="btn btn-primary">
+                    📝 Nueva conversación
+                </a>
             </form>
         </div>
     </div>

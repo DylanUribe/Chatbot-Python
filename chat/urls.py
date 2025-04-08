@@ -18,5 +18,5 @@ urlpatterns = [
     path("api/chats/", ChatMessageListCreate.as_view(), name="api_chat_list"),
     path("api/chats/<int:pk>/", ChatMessageDetail.as_view(), name="api_chat_detail"),
     path('conversations/<int:conversation_id>/download/', views.download_conversation_pdf, name='download_conversation_pdf'),
-
+    path("chats/nueva/", views.start_new_conversation, name="new_conversation"),
 ]

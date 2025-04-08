@@ -28,6 +28,7 @@ class Conversation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='conversations')
     title = models.CharField(max_length=255, default="Sin título")
     created_at = models.DateTimeField(auto_now_add=True)
+    pdf_file = models.FileField(upload_to='pdfs/', null=True, blank=True)
 
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='messages')
