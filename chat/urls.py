@@ -6,7 +6,7 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path("", views.chatbot_view, name="chatbot_view"),
+    path("", views.login_view, name="login"),
     path('get_response/', views.get_response, name='get_response'), 
     path("register/", register_view, name="register"),
     path("login/", login_view, name="login"),
