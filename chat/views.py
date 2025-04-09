@@ -18,6 +18,8 @@ import os
 from django.contrib.auth.decorators import login_required
 
 
+def home_redirect_view(request):
+    return redirect('/auth/login/')
 
 @login_required
 def chatbot_view(request):

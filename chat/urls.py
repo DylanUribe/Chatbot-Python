@@ -6,8 +6,7 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    path("", views.login_view, name="login"),
-    path('get_response/', views.get_response, name='get_response'), 
+    path("", views.chatbot_view, name="chatbot_view"), 
     path("register/", register_view, name="register"),
     path("login/", login_view, name="login"),
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
@@ -20,3 +19,6 @@ urlpatterns = [
     path('conversations/<int:conversation_id>/download/', views.download_conversation_pdf, name='download_conversation_pdf'),
     path("chats/nueva/", views.start_new_conversation, name="new_conversation"),
 ]
+
+
+
